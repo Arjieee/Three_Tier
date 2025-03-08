@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Task Manager</h1>
+        <form action="/add" method="post" class="task-form">
+            <input type="text" name="task_name" class="task-input" placeholder="Enter a new task..." required>
+            <button type="submit" class="add-btn">➕ Add Task</button>
+        </form>
+        
+        <ul class="task-list">
+            {% for task in tasks %}
+                <li class="task-item">
+                    <span class="task-text">{{ task[1] }}</span>
+                    <a href="/delete/{{ task[0] }}" class="delete-btn" onclick="return confirm('Are you sure?')">❌</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
